@@ -15,7 +15,7 @@
   
 
   table{
-   background: coral;
+   background: white;
    margin:auto;
 
   }
@@ -27,7 +27,7 @@
  <div>
   
   <table border="1">
-   <h2 align="center" style="background: #FF5733">Sunnyside OOTD</h2>
+   <h2 align="center" style="color: white">Sunnyside OOTD</h2>
    <tr>    
     <th>Nama</th>
     <th><input type="text"  id="nama" onchange="total()" ></th>
@@ -70,6 +70,10 @@
     <th>Kembalian</th>
     <th><input type="text" style="background: #FFC300" id="total1" disabled></th>
    </tr>
+   <tr>    
+    <th>Diskon</th>
+    <th><input type="text" style="background: #FFC300" id="diskon" disabled></th>
+   </tr>
          
             <tr>
                 <th><input type="button" style="background: white"  onclick="window.print()" value="CETAK"></th>
@@ -90,16 +94,20 @@
    var pembayaran =  parseInt(document.getElementById('bayar').value);
    var jenis = document.getElementById("status").value;
    var jumlah_harga = harga * jumlah_beli;
+   var diskon = jumlah_harga * 10/100;
+    if(harga >=100){
+        document.getElementById('diskon').value = diskon;
+    }
     document.getElementById('total').value = jumlah_harga;
-
-   var kembali = pembayaran - jumlah_harga;
+    var afterDisc = jumlah_harga - diskon;
+   var kembali = pembayaran - afterDisc;
     document.getElementById('total1').value = kembali;
   
    var cetak = "Nama    : "+nama+"</br>"+
                       "Harga   : "+harga+"</br>"+
-                      "Jumlah_beli  : "+jumlah_beli+"</br>"+
+                      "Jumlah beli  : "+jumlah_beli+"</br>"+
                       "Kategori   : "+jenis+"</br>"+
-                      "Jumlah_total  : "+jumlah_harga+"</br>"+
+                      "Jumlah total  : "+jumlah_harga+"</br>"+
                       "pembayaran  : "+pembayaran+"</br>"+
                       "Kembalian  : "+kembali;
     document.getElementById("cetak").innerHTML=cetak;
